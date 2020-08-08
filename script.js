@@ -279,6 +279,45 @@ function showNotification() {
 }
 
 // Press down letters on keyboard or touch
+window.addEventListener('keydown', e => {
+    if (playable) {
+        if (e.keyCode >= 65 && e.keyCode <= 90) {
+            const letter = e.key.toUpperCase();
 
+            if (selectedWord.includes(letter)) {
+                if (!correctLetters.includes(letter)) {
+                    correctLetters.push(letter);
+                    displayWord();
+                } else {
+                    showNotification();
+                }
+            } else {
+                if (!wrongLetters.includes(letter)) {
+                    wrongLetters.push(letter);
+                    updateWrongLetters();
+                } else {
+                    showNotification();
+                }
+            }
+        }
+    }
+});
 
 // Restart game
+playAgain.addEventListener('click', () => {
+    playable = true;
+
+    // Empty arrays
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    displayWord();
+
+    updateWrongLetters();
+
+    popup.style.display = 'none';
+});
+
+displayWord();
