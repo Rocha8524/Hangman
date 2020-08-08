@@ -244,5 +244,41 @@ function displayWord() {
 
 // Update the wrong letters
 function updateWrongLetters() {
+    // Display wrong letter
+    wrongLetters.innerHTML = `
+    ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
+    ${wrongLetters.map(letter => `<span>${letter}</span>`)}`;
 
+    // Display parts
+    figureParts.forEach((part, index) => {
+        const errors = wrongLetters.length;
+
+        if (index < errors) {
+            part.style.display = "block";
+        } else {
+            part.style.display = "none";
+        }
+    });
+
+    // Check if player lose
+    if (wrongLetters.length === figureParts.length) {
+        finalMessage.innerText = 'Loser, you suck! 😕';
+        finalMessageWordReveal.innerText = `The word was: ${selectedWord}`;
+        popup.style.display = 'flex';
+        playable = false;
+    }
 }
+
+// Show notification
+function showNotification() {
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
+}
+
+// Press down letters on keyboard or touch
+
+
+// Restart game
