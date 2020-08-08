@@ -266,7 +266,7 @@ function updateWrongLettersElement() {
     // Check if lost
     if (wrongLetters.length === figureParts.length) {
         finalMessage.innerText = 'Loser, you suck! 😕';
-        finalMessageRevealWord.innerText = `The word was: ${selectedWord}`;
+        finalMessageWordReveal.innerText = `The word was: ${selectedWord}`;
         popup.style.display = 'flex';
         playable = false;
     }
